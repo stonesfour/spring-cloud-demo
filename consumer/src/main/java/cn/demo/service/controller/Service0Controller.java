@@ -1,6 +1,9 @@
 package cn.demo.service.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -95,17 +98,19 @@ public class Service0Controller {
         return user.toString();
     }
 
+    @Autowired
+    RestTemplate restTemplate;
 
     @GetMapping("k8s/{id}/{name}")
     public String k8s(@PathVariable final int id, @PathVariable final String name) {
 
-        return new Config().restTemplate().getForObject("http://provider:8081/setUser/"+ id + "/" + name, String.class);
+        return this.restTemplate.getForObject("http://provider:8081/setUser/"+ id + "/" + name, String.class);
 
     }
     @GetMapping("eureka/{id}/{name}")
     public String eureka(@PathVariable final int id, @PathVariable final String name) {
 
-        return new Config().restTemplate().getForObject("http://provider/setUser/"+ id + "/" + name, String.class);
+        return this.restTemplate.getForObject("http://provider/setUser/"+ id + "/" + name, String.class);
 
     }
 }
