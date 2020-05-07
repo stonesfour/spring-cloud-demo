@@ -1,11 +1,9 @@
 server:
   port: 8761 # 注册中心占用8080端口
 eureka:
-  instance:
-    hostname: ${HOSTNAME:localhost}
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
       #其实就是 http://localhost:8080/eureka/
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ 
+      defaultZone: http://${EUREKA:localhost}:${EUREKA_PORT:${server.port}}/eureka/ 
