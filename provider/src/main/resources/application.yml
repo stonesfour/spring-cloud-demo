@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: provider
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/  #注册中心地址
+  instance:
+    hostname:  ${HOSTNAME:localhost} 
+    instance-id: http://${eureka.instance.hostname}:8081
+server:
+  port: 8081 
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 40000  # feign 超时控制
+service0:
+  ribbon:
+    ReadTimeout: 1000
+    ConnectTimeout: 500
+    MaxAutoRetries: 1  # SR6版本,这里设为1,会重试3次,重试次数还和另外的两个值有关
