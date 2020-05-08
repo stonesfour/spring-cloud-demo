@@ -13,4 +13,6 @@ zuul:
   routes:
     consumer: /c/**
     provider: /p/**
+    gateway: /g/**
+
 
